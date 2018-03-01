@@ -728,7 +728,7 @@ zjq.prototype = {
 				p = p.parent;
 			}
 		// ZK-2069: should check native and fake scrollbar case
-		return inView && this.isScrollIntoView(true);
+		return inView ;//&& this.isScrollIntoView(true);
 	},
 	/**
 	 * Checks whether the element is shown in the current viewport.
@@ -778,6 +778,13 @@ zjq.prototype = {
 					var oel = oels[i],
 						lex = zk(this.jq[0] == oel[0] ? oel[0] = oel[0].parentNode : oel[0]).viewportOffset()[0],
 						tey = zk(this.jq[0] == oel[1] ? oel[1] = oel[1].parentNode : oel[1]).viewportOffset()[1];
+					console.log(this.jq[0], oel[0], oel[1]);
+					if (oel[0] == document || oel[0] == document.html || oel[0] == document.body) {
+						lex = 0;
+					}
+					if (oel[1] == document || oel[1] == document.html || oel[1] == document.body) {
+						tey = 0;
+					}
 					// scrollbar's viewport
 					inView = (x >= lex && x1 <= lex + oel[0].offsetWidth && y >= tey && y1 <= tey + oel[1].offsetHeight);
 					if (!inView)
