@@ -418,12 +418,13 @@ public class Https extends Servlets {
 				final String update_uri = (String) request.getSession().getServletContext()
 						.getAttribute("org.zkoss.zk.ui.http.update-uri"); //B65-ZK-1619
 				String flnm = "";
-				if (update_uri != null && temp.toString().contains(update_uri + "/view")) {
+				//if (update_uri != null && temp.toString().contains(update_uri + "/view")) {
+					// In zk8.5 support IE9 or newer, so we don't need to use this condition.
 					// for Bug ZK-2350, we don't specify the filename when coming with ZK Fileupload, but invoke this directly as Bug ZK-1619
 					//					final String saveAs = URLDecoder.decode(temp.substring(temp.lastIndexOf("/")+1), "UTF-8");
 					//					flnm = ("".equals(saveAs)) ? media.getName() : saveAs;
-				} else
-					flnm = media.getName();
+				//} else
+				flnm = media.getName();
 				if (flnm != null && flnm.length() > 0)
 					value += ";filename=" + encodeFilename(request, flnm);
 				if (media.isContentDisposition())

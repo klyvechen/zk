@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+B85-ZK-3058.zul
+
+        Purpose:
+                
+        Description:
+                
+        History:
+                Thu Mar 29 3:51 PM:26 CST 2018, Created by klyve
+
+Copyright (C) 2018 Potix Corporation. All Rights Reserved.
+
+-->
+
+<zk>
+    <zscript><![CDATA[
+		Filedownload.save("測 試", "text/plain", "/測 試.txt");
+	]]></zscript>
+    Download starting automatically...
+</zk>
