@@ -23,7 +23,8 @@ Copyright (C) 2017 Potix Corporation. All Rights Reserved.
 			model.add("item-" + i);
 		}
 	]]></zscript>
-	
+
+
 	<timer id="timer1" running="true" repeats="true" delay="2000">
         <attribute name="onTimer"><![CDATA[
   			model.add("item-" + (i++));
@@ -37,4 +38,10 @@ Copyright (C) 2017 Potix Corporation. All Rights Reserved.
 		</template>
 	</listbox>
 	<button label="stop timer (for easier debugging in the network tab)" onClick="timer1.stop()"/>
+	<script>
+		window.onload = function () {
+			console.log(jq(".z-listbox"));
+			lb = zk.$(jq(".z-listbox"));
+		}
+	</script>
 </zk>

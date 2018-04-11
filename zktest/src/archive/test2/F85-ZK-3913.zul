@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+F85-ZK-3913.zul
+
+        Purpose:
+                
+        Description:
+                
+        History:
+                Tue Apr 10 6:23 PM:38 CST 2018, Created by klyve
+
+Copyright (C) 2018 Potix Corporation. All Rights Reserved.
+
+-->
+
+<zk>
+    <window apply="org.zkoss.zktest.test2.F85_ZK_3913Composer">
+        <?script src="./js/zk-3913-lib.js"?>
+        <?script src="./js/zk-3913.js"?>
+
+        <label multiline="true">
+            1. type barcode tag as follow, it will generate the barcode.
+            2. click the "decode qrcode"  button, it would decode qrcode to a string.
+            3. click the "decode code128" button, it would decode code128 to a string.
+        </label>
+
+        <barcode type="qr" value="https://www.zkoss.org/" height="100px"/>
+        <barcode type="code128" value="https://www.zkoss.org/" height="100px" width1D="2px"/>
+        <barcode type="EAN13" value="978020137962" height="100px" width1D="2px" margin1D="15" marginTop1D="5" />
+        <barcode type="ITF" value="5678" height="100px" width1D="2px" margin1D="15" marginTop1D="5" />
+        <barcode type="pharmacode" value="1234" height="100px" width1D="2px" fontSize1D="10"/>
+        <barcode type="pharmacode" value="1234" height="50px" width1D="2px" displayValue1D="false"/>
+        <barcode type="pharmacode" value="https://www.zkoss.org/" height="100px" width1D="2px"/>
+        <barcode type="pdf147" value="1234" />
+
+        <button id="qrcodeDecode" label="decode qrcode">
+            <attribute name="onClick">
+                Clients.evalJavaScript("qrcodeTobase64ToServer();");
+            </attribute>
+        </button>
+
+
+        <button id="code128Decode" label="decode code128">
+            <attribute name="onClick">
+                Clients.evalJavaScript("code128Tobase64ToServer();");
+            </attribute>
+        </button>
+
+        <button id="decodeNo3" label="decode no3">
+            <attribute name="onClick">
+                Clients.evalJavaScript("no3Tobase64ToServer();");
+            </attribute>
+        </button>
+
+        <script><![CDATA[
+            var base64String;
+            window.onload = function () {
+                console.log(jq(".z-barcode"));
+                b = []
+                jq(".z-barcode").each(function(){
+                    b.push(zk.$(this));
+                })
+            }
+
+            zk.afterLoad('zkmax.barcode', function () {
+                console.log('do zkmax.barcode.afterload');
+                zkmax.barcode.Barcode.registerLibrary(function mybarcode(wgt) {
+                    canvas = wgt.$n().querySelector('canvas');
+                    //The section can let user to define library.
+                    PDF417.init("1111");
+                    var barcode = PDF417.getBarcodeArray(),
+                    bw = 2,
+                    bh = 2,
+                    e = "";
+                    //canvas = document.createElement("canvas");
+                    canvas.width = bw * barcode.num_cols;
+                    canvas.height = bh * barcode.num_rows;
+                    //document.getElementById("barcode").appendChild(canvas);
+                    for (var ctx = canvas.getContext("2d"), y = 0, r = 0; r < barcode.num_rows; ++r) {
+                        for (var x = 0, c = 0; c < barcode.num_cols; ++c)
+                            1 == barcode.bcode[r][c] && ctx.fillRect(x, y, bw, bh), x += bw;
+                            y += bh
+                    };
+                }, 'PDF417', ['pdf147']);
+            });
+            function qrcodeTobase64ToServer() {
+                base64String = jq("canvas").get(0).toDataURL("");
+                zAu.send(new zk.Event(zk.Widget.$('$qrcodeDecode'), 'onTest', base64String, {toServer:true}));
+            }
+            function code128Tobase64ToServer() {
+                base64String = jq("canvas").get(1).toDataURL("");
+                zAu.send(new zk.Event(zk.Widget.$('$code128Decode'), 'onTest', base64String, {toServer:true}));
+            }
+
+            function no3Tobase64ToServer() {
+                base64String = jq("canvas").get(2).toDataURL("");
+                zAu.send(new zk.Event(zk.Widget.$('$decodeNo3'), 'onTest', base64String, {toServer:true}));
+            }
+            function testFunc() {
+            }
+
+        ]]></script>
+    </window>
+</zk>
