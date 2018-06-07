@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+B85-ZK-3551.zul
+
+        Purpose:
+                
+        Description:
+                
+        History:
+                Fri Jun 01 09:41:47 CST 2018, Created by klyve
+
+Copyright (C) 2018 Potix Corporation. All Rights Reserved.
+
+-->
+
+<zk >
+    <style>.z-menubar-hor, .z-menubar-ver { border: 1px solid #D8D8D8; } 
+    .content {overflow-x: hidden;overflow-y: scroll;}</style>
+    
+ 	<button>
+ 		<attribute name="onClick"><![CDATA[
+              menu0.getMenupopup().setActive(1);
+              targetMenu.getMenupopup().setActive(3);
+ 		]]></attribute>
+ 	</button>
+ 
+    <panel border="normal" title="ZK Report Viewer">
+        <panelchildren>
+            <menubar id="menubar" width="100%">
+                <menu id="menu0" label="File">
+                    <menupopup>
+                        <menu label="New" image="/widgets/menu/drop-down_menu/img/file_new.png">
+                            <menupopup>
+                                <menuitem label="Document" onClick="" image="" />
+                                <menuitem label="Spreadsheet" onClick="" image="" />
+                                <menuitem label="Presentation" onClick="" image="" />
+                            </menupopup>
+                        </menu>
+                        <menuitem label="Open.." onClick="" image="" />
+                        <menuseparator></menuseparator>
+                        <menuitem label="Save" onClick="" image="" />
+                        <menuitem label="Save As..." onClick="" image="" />
+                        <menuitem label="Save All" onClick="" image="" />
+                        <menuitem label="Close" onClick="" image="" />
+                        <menuitem label="Close All" onClick="" image="" />
+                        <menuseparator></menuseparator>
+                        <menuitem label="Import" onClick="" image="" />
+                        <menuitem label="Export" disabled="true" image="" />
+                        <menuseparator></menuseparator>
+                        <menuitem label="Exit" disabled="true" image="" />
+                    </menupopup>
+                </menu>
+                <menu id="targetMenu" label="Edit">
+                    <menupopup>
+                        <menuitem label="Undo" onClick="" image="" />
+                        <menuitem label="Redo" disabled="true" image="" />
+                        <menuseparator></menuseparator>
+                        <menuitem label="Cut" onClick="" image="" />
+                        <menuitem label="Copy" onClick="" image="" />
+                        <menuitem label="Paste" onClick="" image="" />
+                        <menuseparator></menuseparator>
+                        <menuitem label="Select All" onClick="" image="" />
+                    </menupopup>
+                </menu>
+                <menu label="Help">
+                    <menupopup>
+                        <menuitem label="Issue tracker" target="_zkdemo" href="http://tracker.zkoss.org" image="" />
+                        <menu label="About">
+                            <menupopup>
+                                <menuitem label="About Potix" target="_zkdemo" href="http://www.zkoss.org/support/about" onClick="" />
+                            </menupopup>
+                        </menu>
+                    </menupopup>
+                </menu>
+                <menuitem label="ZK Web Framework" target="_zkdemo" href="http://www.zkoss.org/download" image="" onClick="" />
+            </menubar>
+            <div height="300px" sclass="content">
+                <image src=""></image>
+            </div>
+        </panelchildren>
+    </panel>
+</zk>

@@ -99,6 +99,18 @@ it will be useful, but WITHOUT ANY WARRANTY.
 zul.menu.Menupopup = zk.$extends(zul.wgt.Popup, {
 	_curIndex: -1,
 
+	setActive: function (index) {
+		this._curIndex = index;
+		var chdClass = this.firstChild.$class,
+			child = this.firstChild;
+		for (var i = 0; i < this.nChildren; i++) {
+			if (chdClass._isActive(child)) {
+				chdClass._rmActive(child);
+				break;
+			}
+		}
+		chdClass._addActive(this.getChildAt(index));
+	},
 	zsync: function () {
 		this.$supers('zsync', arguments);
 

@@ -16,7 +16,14 @@ Copyright (C) 2005 Potix Corporation. All Rights Reserved.
 */
 package org.zkoss.zul;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.management.Notification;
+
+import sun.plugin2.message.Message;
+
 import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.HtmlBasedComponent;
 import org.zkoss.zk.ui.UiException;
 
 /**
@@ -37,6 +44,8 @@ import org.zkoss.zk.ui.UiException;
  * @author tomyeh
  */
 public class Menupopup extends Popup {
+	
+	private int _active = -1;
 	//-- super --//
 	public String getZclass() {
 		return _zclass == null ? "z-menupopup" : _zclass;
@@ -47,5 +56,17 @@ public class Menupopup extends Popup {
 		if (!(child instanceof Menuitem) && !(child instanceof Menuseparator) && !(child instanceof Menu))
 			throw new UiException("Unsupported child for menupopup: " + child);
 		super.beforeChildAdded(child, refChild);
+	}
+
+	public void setActive(int index) {
+		List<Component> children = this.getChildren();
+		if (index < 0 || index > children.size())
+			Messagebox.show("Index: " + index + " is invalid");
+		if (index != _active) {
+			this.open(this.getFirstChild(), "after_start");
+			Component activeChild = children.get(index);
+			((HtmlBasedComponent) activeChild).setFocus(true);
+			smartUpdate("active", index);
+		}
 	}
 }
