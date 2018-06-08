@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- zk.xml
+	Purpose:
+		
+	Description:
+		
+	History:
+		Sun Mar 26 16:29:07     2006, Created by tomyeh
+
+Copyright (C) 2006 Potix Corporation. All Rights Reserved.
+-->
+
+<zk>
+
+	<!-- Defines the application's name -->
+	<preference>
+		<name>org.zkoss.zk.ui.WebApp.name</name>
+		<value>ZK Test</value>
+	</preference>
+	
+	<library-property>
+		<name>org.zkoss.zul.listbox.checkmarkDeselectOthers</name>
+		<value>true</value>
+	</library-property>
+	<library-property>
+		<name>org.zkoss.zk.WPD.cache</name>
+		<value>false</value>
+	</library-property>
+	<library-property>
+		<name>org.zkoss.zk.WCS.cache</name>
+		<value>false</value>
+	</library-property>
+
+</zk>
